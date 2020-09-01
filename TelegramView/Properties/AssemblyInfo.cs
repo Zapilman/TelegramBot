@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
-[assembly: AssemblyTitle("TelegramBotView")]
+[assembly: AssemblyTitle("TelegramView")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TelegramBotView")]
+[assembly: AssemblyProduct("TelegramView")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID представляет идентификатор typelib, если этот проект доступен из модели COM
-[assembly: Guid("2d333f69-bae2-4f5e-8d11-dfef820f3361")]
+[assembly: Guid("7dec0364-6a0b-4eab-9cd9-4eeb4c29ddd2")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

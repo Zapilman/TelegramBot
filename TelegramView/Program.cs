@@ -1,5 +1,8 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using TelegramBot.Controller;
@@ -20,7 +23,7 @@ namespace TelegramView
             botClient.OnCallbackQuery += Bot_OnCallbackQuery;
             botClient.StartReceiving();
             Console.ReadLine();
-            botClient.StopReceiving();
+            botClient.StopReceiving();  
         }
 
         private static void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
@@ -28,16 +31,19 @@ namespace TelegramView
             throw new NotImplementedException();
         }
 
-        private static  void Bot_OnMessage(object sender, MessageEventArgs e)
+        private static async void Bot_OnMessage(object sender, MessageEventArgs e)
         {
             var text = e?.Message?.Text;
-            if (text == null)
+            if(text == null)
             {
                 return;
             }
-            var controller = new CommandController(db,e.Message,botClient);
+            var controller = new CommandController();
+            foreach(var command in db.Commands)
+            {
+                await botClient.SendTextMessageAsync(e.Message.Chat.Id, command.Name);
+            }
             
-
 
         }
     }

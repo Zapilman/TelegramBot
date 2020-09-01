@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CDBF93D-593B-4727-A603-267B585DE649}</ProjectGuid>
+    <ProjectGuid>{2D333F69-BAE2-4F5E-8D11-DFEF820F3361}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>TelegramBotView</RootNamespace>
     <AssemblyName>TelegramBotView</AssemblyName>
@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TelegramBot\TelegramBotBl.csproj">
-      <Project>{d64bdc29-2e7a-45a3-8b01-06de06ca284c}</Project>
+      <Project>{D64BDC29-2E7A-45A3-8B01-06DE06CA284C}</Project>
       <Name>TelegramBotBl</Name>
     </ProjectReference>
   </ItemGroup>

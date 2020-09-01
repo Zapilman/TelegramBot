@@ -10,6 +10,8 @@ namespace TelegramBot.Model
 
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Command> Commands { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<Site> Sites { get; set; }

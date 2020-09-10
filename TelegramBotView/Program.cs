@@ -11,6 +11,7 @@ namespace TelegramView
     {
         private static BotContext db;
         private static TelegramBotClient botClient;
+        private static User currentUser = null;
         static void Main(string[] args)
         {
             db = new BotContext();
@@ -23,9 +24,25 @@ namespace TelegramView
             botClient.StopReceiving();
         }
 
-        private static void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
+        private static async void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
-            throw new NotImplementedException();
+            var buttonText = e.CallbackQuery.Data;
+            
+            switch (buttonText)
+            {
+                case "Создать пароль":
+                    string password = Guid.NewGuid().ToString();
+                    await botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, $"Созданный пароль: \r\n {password}");
+                    break;
+                case "Зарегистрироваться":
+                    var registrate = new RegistrateCommand();
+                    registrate.Execute(e.CallbackQuery.Message,botClient);
+                    break;
+                case "Войти в аккаунт":
+                    break;
+                    
+            }
+            
         }
 
         private static  void Bot_OnMessage(object sender, MessageEventArgs e)
@@ -35,9 +52,7 @@ namespace TelegramView
             {
                 return;
             }
-            var controller = new CommandController(db,e.Message,botClient);
-            
-
+            new CommandController(db,e.Message,botClient,currentUser);
 
         }
     }

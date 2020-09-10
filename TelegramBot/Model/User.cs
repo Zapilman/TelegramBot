@@ -11,15 +11,23 @@ namespace TelegramBot.Model
 
         public string Password { get; }
 
-        public string Username { get; }
 
         public string Name { get; }
+        
 
-        public ICollection<Item> Items { get; set; }
+        public virtual ICollection<Site> Sites { get; set; }
+
+        public User() { }
+
+        public User(string login,string password)
+        {
+            Login = login;
+            Password = password;
+        }
 
         public override string ToString()
         {
-            return Username;
+            return this.Name;
         }
     }
 }

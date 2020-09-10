@@ -9,6 +9,11 @@ namespace TelegramBot.Model
     {
         public override string Name => "/createPassword";
 
+        public override bool Contains(string command, User user)
+        {
+            return command.Contains(this.Name);
+        }
+
         public override async void Execute(Message message, TelegramBotClient botClient)
         {
             var pass = Guid.NewGuid().ToString();

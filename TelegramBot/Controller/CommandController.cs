@@ -9,12 +9,12 @@ namespace TelegramBot.Controller
     {
         
 
-        public CommandController(BotContext db,Message message,TelegramBotClient botClient)
+        public CommandController(BotContext db,Message message,TelegramBotClient botClient, Model.User user)
         {
             
             foreach(var command in db.Commands)
             {
-                if (command.Contains(message.Text))
+                if (command.Contains(message.Text,user))
                 {
                     command.Execute(message, botClient);
                 }

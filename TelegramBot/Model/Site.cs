@@ -15,5 +15,18 @@ namespace TelegramBot.Model
         public int UserId { get; set; }
         public User user { get; set; }
 
+        public Site() { }
+
+        public Site(string name, int userId)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new System.ArgumentException("message", nameof(name));
+            }
+
+            Name = name;
+            UserId = userId;
+        }
+
     }
 }

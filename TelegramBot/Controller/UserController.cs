@@ -1,15 +1,18 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using TelegramBot.Model;
 
 namespace TelegramBot.Controller
 {
-    public class UserController
+    public class UserController:ControllerBase
     {
-        private BotContext botContext;
         private Model.User currentUser;
-        public UserController(string password, string login)
+        public List<Model.User> Users { get; }
+        
+        public Model.User User { get; }
+        public UserController(string password, string login,string userName)
         {
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -21,15 +24,51 @@ namespace TelegramBot.Controller
                 throw new System.ArgumentException("message", nameof(login));
             }
 
-            botContext = new BotContext();
+            Users = GetUsersData();
 
 
             
 
             var user = new Model.User(password, login);
-            botContext.Users.Add(user);
-            botContext.SaveChanges();
+            Users.Add(user);
+            Save();
 
+        }
+
+
+        public UserController ()
+        {
+            var user = new Model.User("123", "321","jopa");
+            Users = new List<Model.User>(); 
+            
+            Users.Add(user);
+            Save();
+            
+        }
+
+        public UserController(string login, string password)
+        {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                throw new System.ArgumentException("message", nameof(login));
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new System.ArgumentException("message", nameof(password));
+            }
+
+
+        }
+
+        private List<Model.User> GetUsersData()
+        {
+            return Load<Model.User>() ?? new List<Model.User>();
+        }
+
+        private void Save()
+        {
+            Save(Users);
         }
 
     }

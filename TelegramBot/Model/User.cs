@@ -15,7 +15,6 @@ namespace TelegramBot.Model
         public string Name { get; }
         
 
-        public virtual ICollection<Site> Sites { get; set; }
 
         public User() { }
 
@@ -23,6 +22,29 @@ namespace TelegramBot.Model
         {
             Login = login;
             Password = password;
+        }
+
+
+        public User(string login, string password, string userName)
+        {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                throw new System.ArgumentException("message", nameof(login));
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new System.ArgumentException("message", nameof(password));
+            }
+
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new System.ArgumentException("message", nameof(userName));
+            }
+
+            Login = login;
+            Password = password;
+            Name = userName;
         }
 
         public override string ToString()

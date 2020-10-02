@@ -11,10 +11,11 @@ namespace TelegramView
     {
         private static BotContext db;
         private static TelegramBotClient botClient;
-        private static User currentUser = null;
+        private static User currentUser;
         static void Main(string[] args)
         {
             db = new BotContext();
+            
             botClient = new TelegramBotClient("1287472177:AAEEEdv8d0AIU2Un8ney1D0rwNA4MWeUTkA");
             var me = botClient.GetMeAsync().Result;
             botClient.OnMessage += Bot_OnMessage;
@@ -27,9 +28,10 @@ namespace TelegramView
         private static async void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
             var buttonText = e.CallbackQuery.Data;
-            
+            botClient.StopReceiving();
             switch (buttonText)
             {
+
                 case "Создать пароль":
                     string password = Guid.NewGuid().ToString();
                     await botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, $"Созданный пароль: \r\n {password}");
@@ -39,6 +41,8 @@ namespace TelegramView
                     registrate.Execute(e.CallbackQuery.Message,botClient);
                     break;
                 case "Войти в аккаунт":
+                    var logIn = new LogInCommand();
+                    logIn.Execute(e.CallbackQuery.Message, botClient);
                     break;
                     
             }

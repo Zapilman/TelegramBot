@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -58,6 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ControllerBase.cs" />
+    <Compile Include="Controller\DbSaver.cs" />
+    <Compile Include="Controller\GetStepByStep.cs" />
+    <Compile Include="Controller\IDataSaver.cs" />
+    <Compile Include="Controller\IGetValues.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\CommandController.cs" />
     <Compile Include="Migrations\202009011413223_test.cs" />
@@ -84,9 +91,18 @@
     <Compile Include="Migrations\202009101739587_Update3.designer.cs">
       <DependentUpon>202009101739587_Update3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009270903518_EK.cs" />
+    <Compile Include="Migrations\202009270903518_EK.designer.cs">
+      <DependentUpon>202009270903518_EK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010010706079_user.cs" />
+    <Compile Include="Migrations\202010010706079_user.designer.cs">
+      <DependentUpon>202010010706079_user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\BotContext.cs" />
     <Compile Include="Model\Command.cs" />
+    <Compile Include="Model\LogInCommand.cs" />
     <Compile Include="Model\RegistrateCommand.cs" />
     <Compile Include="Model\CreatePassCommand.cs" />
     <Compile Include="Model\SayHelloCommand.cs" />
@@ -96,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -117,6 +134,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009101739587_Update3.resx">
       <DependentUpon>202009101739587_Update3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009270903518_EK.resx">
+      <DependentUpon>202009270903518_EK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010010706079_user.resx">
+      <DependentUpon>202010010706079_user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

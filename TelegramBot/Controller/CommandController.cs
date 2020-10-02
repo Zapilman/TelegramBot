@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using TelegramBot.Model;
 
@@ -17,10 +16,12 @@ namespace TelegramBot.Controller
                 if (command.Contains(message.Text,user))
                 {
                     command.Execute(message, botClient);
+                    return;
                 }
             }
 
-
+            
+            
         }
 
     }

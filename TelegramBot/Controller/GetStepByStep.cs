@@ -19,6 +19,8 @@ namespace TelegramBot.Controller
         public static async void Bot_OnMessage(object sender, MessageEventArgs e)
         {
             var text = e.Message.Text;
+            await bot.SendTextMessageAsync(e.Message.Chat.Id, "Запущен 2 оброботчик событий");
+            
             if (CheckInput(text))
             {
                 bot.StopReceiving();
@@ -54,36 +56,43 @@ namespace TelegramBot.Controller
             return sucsess;
         }
 
-        public async void Execute( Message message, TelegramBotClient botClient)
+        public  void Execute( Message message, TelegramBotClient botClient)
         {
             bot = botClient;
-            await bot.SendTextMessageAsync(message.Chat.Id, $"Input login");
+             bot.SendTextMessageAsync(message.Chat.Id, $"Input login");
             item1 = "login";
             bot.OnMessage += Bot_OnMessage;
             bot.StartReceiving();
-            
-            while (true)
+            var time = 0;
+            while (time<10)
             {
-                
+
                 Thread.Sleep(3000);
                 if (sucsess)
                 {
                     sucsess = false;
-                    await botClient.SendTextMessageAsync(message.Chat.Id, $"Input password");
+                     botClient.SendTextMessageAsync(message.Chat.Id, $"Input password");
                     item1 = "password";
                     bot.StartReceiving();
-                    while (true)
+                    while (time<10)
                     {
                         Thread.Sleep(3000);
                         if (sucsess)
                         {
-                            await bot.SendTextMessageAsync(message.Chat.Id, "Успешная авторизация");
+                             bot.SendTextMessageAsync(message.Chat.Id, "Успешная авторизация");
+                            bot.OnMessage -= Bot_OnMessage;
+                            
                             return;
+
                         }
+                        time++;
                     }
                 }
+                time++;
             }
-
+             botClient.SendTextMessageAsync(message.Chat.Id, "Время для автроризации истекло  ");
+            bot.OnMessage -= Bot_OnMessage;
+            //bot.StopReceiving();
         }
 
         

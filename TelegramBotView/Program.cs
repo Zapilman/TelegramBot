@@ -25,16 +25,17 @@ namespace TelegramView
             botClient.StopReceiving();
         }
 
-        private static async void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
+        private static  void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
             var buttonText = e.CallbackQuery.Data;
-            botClient.StopReceiving();
+            botClient.OnMessage -= Bot_OnMessage;
+            botClient.OnCallbackQuery -= Bot_OnCallbackQuery;
             switch (buttonText)
             {
 
                 case "Создать пароль":
                     string password = Guid.NewGuid().ToString();
-                    await botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, $"Созданный пароль: \r\n {password}");
+                    botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, $"Созданный пароль: \r\n {password}");
                     break;
                 case "Зарегистрироваться":
                     var registrate = new RegistrateCommand();
@@ -43,14 +44,19 @@ namespace TelegramView
                 case "Войти в аккаунт":
                     var logIn = new LogInCommand();
                     logIn.Execute(e.CallbackQuery.Message, botClient);
+                    botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Метод закончил выполнение");
                     break;
                     
             }
-            
+            botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Оброботчик событий работает");
+            botClient.OnMessage += Bot_OnMessage;
+            botClient.OnCallbackQuery += Bot_OnCallbackQuery;
+
         }
 
         private static  void Bot_OnMessage(object sender, MessageEventArgs e)
         {
+            botClient.SendTextMessageAsync(e.Message.Chat.Id, "Запущен 1 обработчик событий");  
             var text = e?.Message?.Text;
             if (text == null)
             {

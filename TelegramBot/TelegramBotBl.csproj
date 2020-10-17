@@ -67,41 +67,12 @@
     <Compile Include="Controller\IGetValues.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\CommandController.cs" />
-    <Compile Include="Migrations\202009011413223_test.cs" />
-    <Compile Include="Migrations\202009011413223_test.designer.cs">
-      <DependentUpon>202009011413223_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101716135_KEk.cs" />
-    <Compile Include="Migrations\202009101716135_KEk.designer.cs">
-      <DependentUpon>202009101716135_KEk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101732006_Update.cs" />
-    <Compile Include="Migrations\202009101732006_Update.designer.cs">
-      <DependentUpon>202009101732006_Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101733417_Update1.cs" />
-    <Compile Include="Migrations\202009101733417_Update1.designer.cs">
-      <DependentUpon>202009101733417_Update1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101737026_Update2.cs" />
-    <Compile Include="Migrations\202009101737026_Update2.designer.cs">
-      <DependentUpon>202009101737026_Update2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101739587_Update3.cs" />
-    <Compile Include="Migrations\202009101739587_Update3.designer.cs">
-      <DependentUpon>202009101739587_Update3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009270903518_EK.cs" />
-    <Compile Include="Migrations\202009270903518_EK.designer.cs">
-      <DependentUpon>202009270903518_EK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010010706079_user.cs" />
-    <Compile Include="Migrations\202010010706079_user.designer.cs">
-      <DependentUpon>202010010706079_user.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\AllUsersCommand.cs" />
     <Compile Include="Model\BotContext.cs" />
     <Compile Include="Model\Command.cs" />
+    <Compile Include="Model\CommandsList.cs" />
+    <Compile Include="Model\Item.cs" />
     <Compile Include="Model\LogInCommand.cs" />
     <Compile Include="Model\RegistrateCommand.cs" />
     <Compile Include="Model\CreatePassCommand.cs" />
@@ -115,32 +86,6 @@
     <None Include=".editorconfig" />
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009011413223_test.resx">
-      <DependentUpon>202009011413223_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101716135_KEk.resx">
-      <DependentUpon>202009101716135_KEk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101732006_Update.resx">
-      <DependentUpon>202009101732006_Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101733417_Update1.resx">
-      <DependentUpon>202009101733417_Update1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101737026_Update2.resx">
-      <DependentUpon>202009101737026_Update2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101739587_Update3.resx">
-      <DependentUpon>202009101739587_Update3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009270903518_EK.resx">
-      <DependentUpon>202009270903518_EK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010010706079_user.resx">
-      <DependentUpon>202010010706079_user.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

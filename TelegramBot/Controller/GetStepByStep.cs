@@ -12,57 +12,21 @@ namespace TelegramBot.Controller
 {
     public class GetStepByStep : IGetValues 
     {
-        private static string item1;
+        public static string item1;
         private static TelegramBotClient bot;
         private static Model.User currentUser;
-        private static bool sucsess = false;
-        public static async void Bot_OnMessage(object sender, MessageEventArgs e)
-        {
-            var text = e.Message.Text;
-            await bot.SendTextMessageAsync(e.Message.Chat.Id, "Запущен 2 оброботчик событий");
-            
-            if (CheckInput(text))
-            {
-                bot.StopReceiving();
-            }
-            else
-            {
-                await bot.SendTextMessageAsync(e.Message.Chat.Id, $"You inputed wrong {item1}");
-            }
+        public static bool sucsess = false;
+       
 
-         }
+        //TODO: сделать ститический класс в котором будет через using создаваться подключение к базе данный(в папке контроллеры) шоб не как тут на прямую.
 
         
-
-        public static bool CheckInput(string data)
-        {
-            UserController userController = new UserController();
-            if(item1 == "login")
-            {
-                currentUser = userController.Users.SingleOrDefault(u => u.Login == data);
-            }
-            if(item1 == "password")
-            {
-                currentUser = userController.Users.SingleOrDefault(u => u.Password == data);
-            }
-
-            if (currentUser == null)
-            {
-                sucsess = false;
-                return sucsess;
-            }
-
-            sucsess = true;
-            return sucsess;
-        }
 
         public  void Execute( Message message, TelegramBotClient botClient)
         {
             bot = botClient;
-             bot.SendTextMessageAsync(message.Chat.Id, $"Input login");
+            bot.SendTextMessageAsync(message.Chat.Id, $"Input login");
             item1 = "login";
-            bot.OnMessage += Bot_OnMessage;
-            bot.StartReceiving();
             var time = 0;
             while (time<10)
             {
@@ -79,8 +43,7 @@ namespace TelegramBot.Controller
                         Thread.Sleep(3000);
                         if (sucsess)
                         {
-                             bot.SendTextMessageAsync(message.Chat.Id, "Успешная авторизация");
-                            bot.OnMessage -= Bot_OnMessage;
+                             bot.SendTextMessageAsync(message.Chat.Id, "Операция прошла успешна");
                             
                             return;
 
@@ -90,9 +53,7 @@ namespace TelegramBot.Controller
                 }
                 time++;
             }
-             botClient.SendTextMessageAsync(message.Chat.Id, "Время для автроризации истекло  ");
-            bot.OnMessage -= Bot_OnMessage;
-            //bot.StopReceiving();
+             botClient.SendTextMessageAsync(message.Chat.Id, "Время на выполнение операции истекло истекло  ");
         }
 
         
@@ -100,5 +61,7 @@ namespace TelegramBot.Controller
         {
             return currentUser;
         }
+
+        
     }
 }

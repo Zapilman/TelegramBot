@@ -29,7 +29,7 @@ namespace TelegramBot.Controller
 
             
 
-            var user = new Model.User(password, login);
+            var user = new Model.User(password, login,userName);
             Users.Add(user);
             Save();
 
@@ -38,28 +38,14 @@ namespace TelegramBot.Controller
 
         public UserController ()
         {
-            var user = new Model.User("123", "321","jopa");
-            Users = new List<Model.User>(); 
+            Users = GetUsersData();
             
-            Users.Add(user);
-            Save();
+            
+            
             
         }
 
-        public UserController(string login, string password)
-        {
-            if (string.IsNullOrWhiteSpace(login))
-            {
-                throw new System.ArgumentException("message", nameof(login));
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new System.ArgumentException("message", nameof(password));
-            }
-
-
-        }
+      
 
         private List<Model.User> GetUsersData()
         {

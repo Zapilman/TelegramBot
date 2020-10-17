@@ -43,6 +43,7 @@ namespace TelegramView
                     break;
                 case "Войти в аккаунт":
                     var logIn = new LogInCommand();
+                    
                     logIn.Execute(e.CallbackQuery.Message, botClient);
                     botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Метод закончил выполнение");
                     break;

@@ -9,10 +9,10 @@ namespace TelegramBot.Controller
     {
 
 
-        private IDataSaver manager = new DbSaver();
+        private readonly IDataSaver manager = new DbSaver();
         
 
-        public CommandController(Message message,TelegramBotClient botClient, Model.User user)
+        public CommandController(Message message,TelegramBotClient botClient)
         {
 
             var commands = new CommandsList();
@@ -25,10 +25,10 @@ namespace TelegramBot.Controller
 
             foreach (var command in manager.Load<Command>())
             {
-                if (command.Contains(message.Text, user))
+                if (command.Contains(message.Text))
                 {
                     command.Execute(message, botClient);
-                    botClient.SendTextMessageAsync(message.Chat.Id, $"{command.Id}");
+                        
                     return;
                 }
             }

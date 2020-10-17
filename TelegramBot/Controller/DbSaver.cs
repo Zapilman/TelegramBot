@@ -11,30 +11,23 @@ namespace TelegramBot.Controller
     {
         public List<T> Load<T>() where T : class
         {
-            using(var botContext = new BotContext())
-            {
-                var result = botContext.Set<T>().Where(t => true).ToList();
-                return result;
-            }
+            using var botContext = new BotContext();
+            var result = botContext.Set<T>().Where(t => true).ToList();
+            return result;
         }
 
         public void Save<T>(List<T> items) where T : class
         {
-            using (var botContext = new BotContext())
-            {
-                
-                botContext.Set<T>().AddRange(items);
-                botContext.SaveChanges();
-            }
+            using var botContext = new BotContext();
+            botContext.Set<T>().AddRange(items);
+            botContext.SaveChanges();
         }
         
         public void Add<T>(T item) where T : class
         {
-            using(var botContext = new BotContext())
-            {
-                botContext.Set<T>().Add(item);
-                botContext.SaveChanges();
-            }
+            using var botContext = new BotContext();
+            botContext.Set<T>().Add(item);
+            botContext.SaveChanges();
         }
 
     }

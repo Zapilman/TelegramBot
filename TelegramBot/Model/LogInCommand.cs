@@ -14,11 +14,11 @@ namespace TelegramBot.Model
     {
         private Model.User currentUser;
         private TelegramBotClient bot;
-        private IGetValues manager = new GetStepByStep();
+        private readonly IGetValues manager = new GetStepByStep();
 
         public override string Name => "/log_in";
 
-        public override bool Contains(string command, User user)
+        public override bool Contains(string command)
         {
             return command.Contains(this.Name);
         }

@@ -14,11 +14,9 @@ namespace TelegramBot.Controller
     {
         public static string item1;
         private static TelegramBotClient bot;
-        private static Model.User currentUser;
         public static bool sucsess = false;
        
 
-        //TODO: сделать ститический класс в котором будет через using создаваться подключение к базе данный(в папке контроллеры) шоб не как тут на прямую.
 
         
 
@@ -57,10 +55,7 @@ namespace TelegramBot.Controller
         }
 
         
-        public Model.User GetUser()
-        {
-            return currentUser;
-        }
+        
 
         
     }

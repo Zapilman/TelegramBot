@@ -16,9 +16,9 @@ namespace TelegramBot.Model
 
         public override string Name => "/registrate";
 
-        private IGetValues manager = new GetStepByStep();
+        private readonly IGetValues manager = new GetStepByStep();
 
-        public override bool Contains(string command, User user)
+        public override bool Contains(string command)
         {
             return command.Contains(this.Name);
         }

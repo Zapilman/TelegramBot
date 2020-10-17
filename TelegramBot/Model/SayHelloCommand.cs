@@ -12,13 +12,9 @@ namespace TelegramBot.Model
     {
         public override string Name => "/sayhello";
 
-        public override bool Contains(string command, User user)
+        public override bool Contains(string command)
         {
-            if(user!= null)
-            {
-                return command.Contains(this.Name);
-            }
-            return false;
+            return command.Contains(this.Name);
         }
 
         public override async void Execute(Message message, TelegramBotClient botClient)

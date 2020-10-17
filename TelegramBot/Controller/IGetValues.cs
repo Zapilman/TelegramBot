@@ -11,7 +11,6 @@ namespace TelegramBot.Controller
     {
           void Execute( Message message, TelegramBotClient botClient);
 
-          Model.User GetUser();
  
 
     }

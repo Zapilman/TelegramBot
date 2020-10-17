@@ -8,7 +8,6 @@ namespace TelegramBot.Controller
 {
     public class UserController:ControllerBase
     {
-        private Model.User currentUser;
         public List<Model.User> Users { get; }
         
         public Model.User User { get; }

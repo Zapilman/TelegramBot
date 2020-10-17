@@ -10,10 +10,9 @@ namespace TelegramView
     class Program
     {
         private static TelegramBotClient botClient;
-        private static User currentUser;
-        static void Main(string[] args)
+        static void Main()
         {
-            
+
             botClient = new TelegramBotClient("1287472177:AAEEEdv8d0AIU2Un8ney1D0rwNA4MWeUTkA");
             var me = botClient.GetMeAsync().Result;
             botClient.OnMessage += Bot_OnMessage;
@@ -23,7 +22,7 @@ namespace TelegramView
             botClient.StopReceiving();
         }
 
-        private static  void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
+        private static void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
             var buttonText = e.CallbackQuery.Data;
             botClient.OnMessage -= Bot_OnMessage;
@@ -32,20 +31,20 @@ namespace TelegramView
             {
 
                 case "Создать пароль":
-                    string password = Guid.NewGuid().ToString();
-                    botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, $"Созданный пароль: \r\n {password}");
+                    var passComm = new CreatePassCommand();
+                    passComm.Execute(e.CallbackQuery.Message, botClient);
                     break;
                 case "Зарегистрироваться":
                     var registrate = new RegistrateCommand();
-                    registrate.Execute(e.CallbackQuery.Message,botClient);
+                    registrate.Execute(e.CallbackQuery.Message, botClient);
                     break;
                 case "Войти в аккаунт":
                     var logIn = new LogInCommand();
-                    
+
                     logIn.Execute(e.CallbackQuery.Message, botClient);
                     botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Метод закончил выполнение");
                     break;
-                    
+
             }
             botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Оброботчик событий работает");
             botClient.OnMessage += Bot_OnMessage;
@@ -53,15 +52,15 @@ namespace TelegramView
 
         }
 
-        private static  void Bot_OnMessage(object sender, MessageEventArgs e)
+        private static void Bot_OnMessage(object sender, MessageEventArgs e)
         {
-            botClient.SendTextMessageAsync(e.Message.Chat.Id, "Запущен 1 обработчик событий");  
+            botClient.SendTextMessageAsync(e.Message.Chat.Id, "Запущен 1 обработчик событий");
             var text = e?.Message?.Text;
             if (text == null)
             {
                 return;
             }
-            new CommandController(e.Message,botClient,currentUser);
+            new CommandController(e.Message, botClient);
 
         }
     }

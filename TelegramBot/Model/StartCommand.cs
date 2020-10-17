@@ -11,7 +11,7 @@ namespace TelegramBot.Model
         public override string Name => "/start";
 
 
-        public override bool Contains(string command, User user)
+        public override bool Contains(string command)
         {
             return command.Contains(this.Name);
         }

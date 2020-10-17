@@ -13,7 +13,7 @@ namespace TelegramBot.Model
 
         public abstract void Execute(Message message, TelegramBotClient botClient);
 
-        public abstract bool Contains(string command, User user);
+        public abstract bool Contains(string command);
         
     }
 }

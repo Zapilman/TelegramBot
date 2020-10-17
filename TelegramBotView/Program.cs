@@ -9,12 +9,10 @@ namespace TelegramView
 {
     class Program
     {
-        private static BotContext db;
         private static TelegramBotClient botClient;
         private static User currentUser;
         static void Main(string[] args)
         {
-            db = new BotContext();
             
             botClient = new TelegramBotClient("1287472177:AAEEEdv8d0AIU2Un8ney1D0rwNA4MWeUTkA");
             var me = botClient.GetMeAsync().Result;
@@ -63,7 +61,7 @@ namespace TelegramView
             {
                 return;
             }
-            new CommandController(db,e.Message,botClient,currentUser);
+            new CommandController(e.Message,botClient,currentUser);
 
         }
     }

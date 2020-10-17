@@ -8,23 +8,22 @@ namespace TelegramBot.Controller
     public class CommandController
     {
 
-        BotContext db;
 
+        private IDataSaver manager = new DbSaver();
         
 
-        public CommandController(BotContext db,Message message,TelegramBotClient botClient, Model.User user)
+        public CommandController(Message message,TelegramBotClient botClient, Model.User user)
         {
 
             var commands = new CommandsList();
-            this.db = db;
             
             foreach(var command in commands.GetCommands())
             {
                 IsContains(command);
             }
-            db.SaveChanges();
+            
 
-            foreach (var command in db.Commands)
+            foreach (var command in manager.Load<Command>())
             {
                 if (command.Contains(message.Text, user))
                 {
@@ -42,14 +41,14 @@ namespace TelegramBot.Controller
 
         public void IsContains(Command command)
         {
-            foreach (var dbCommand in db.Commands)
+            foreach (var dbCommand in manager.Load<Command>())
             {
                 if (dbCommand.Name == command.Name)
                 {
                     return;
                 }
             }
-            db.Commands.Add(command);
+            manager.Add<Command>(command);
         }
 
     }

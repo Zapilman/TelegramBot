@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ControllerBase.cs" />
-    <Compile Include="Controller\DbController.cs" />
     <Compile Include="Controller\DbSaver.cs" />
     <Compile Include="Controller\GetStepByStep.cs" />
     <Compile Include="Controller\IDataSaver.cs" />

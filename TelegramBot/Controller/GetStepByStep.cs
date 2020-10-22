@@ -33,7 +33,7 @@ namespace TelegramBot.Controller
                 if (sucsess)
                 {
                     sucsess = false;
-                     botClient.SendTextMessageAsync(message.Chat.Id, $"Input password");
+                    botClient.SendTextMessageAsync(message.Chat.Id, $"Input password");
                     item1 = "password";
                     bot.StartReceiving();
                     while (time<10)
@@ -42,7 +42,7 @@ namespace TelegramBot.Controller
                         if (sucsess)
                         {
                              bot.SendTextMessageAsync(message.Chat.Id, "Операция прошла успешна");
-                            
+                            sucsess = false;
                             return;
 
                         }

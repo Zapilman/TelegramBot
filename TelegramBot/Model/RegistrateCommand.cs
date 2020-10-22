@@ -14,6 +14,8 @@ namespace TelegramBot.Model
         private string login;
         private string password;
 
+
+
         public override string Name => "/registrate";
 
         private readonly IGetValues manager = new GetStepByStep();
@@ -33,6 +35,11 @@ namespace TelegramBot.Model
 
         }
 
+        public Model.User GetUser()
+        {
+            return currentUser;
+        }
+
         private void Bot_OnMessage(object sender, MessageEventArgs e)
         {
             var text = e.Message.Text;
@@ -44,6 +51,10 @@ namespace TelegramBot.Model
                 if(GetStepByStep.item1 == "password")
                 {
                     var controller = new UserController(login, password, e.Message.Chat.Username);
+                    var user = new User(login, password);
+
+                    currentUser = controller.GetUser();
+                    currentUser = user;
                     bot.SendTextMessageAsync(e.Message.Chat.Id, $"@{e.Message.Chat.Username} вы успешно зарегистрированы!");
                 }
             }

@@ -32,7 +32,7 @@ namespace TelegramView
 
                 case "Создать пароль":
                     var passComm = new CreatePassCommand();
-                    passComm.Execute(e.CallbackQuery.Message, botClient);
+                    passComm.Execute(e.CallbackQuery.Message, botClient);   
                     break;
                 case "Зарегистрироваться":
                     var registrate = new RegistrateCommand();

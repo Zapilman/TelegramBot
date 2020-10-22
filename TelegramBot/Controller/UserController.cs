@@ -10,7 +10,7 @@ namespace TelegramBot.Controller
     {
         public List<Model.User> Users { get; }
         
-        public Model.User User { get; }
+        private Model.User User { get; }
         public UserController(string password, string login,string userName)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -23,7 +23,7 @@ namespace TelegramBot.Controller
                 throw new System.ArgumentException("message", nameof(login));
             }
 
-            Users = GetUsersData();
+            Users = new List<Model.User>() ;
 
 
             
@@ -34,6 +34,10 @@ namespace TelegramBot.Controller
 
         }
 
+        public Model.User GetUser()
+        {
+            return User;
+        }
 
         public UserController ()
         {

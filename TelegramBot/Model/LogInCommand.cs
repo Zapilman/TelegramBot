@@ -18,6 +18,11 @@ namespace TelegramBot.Model
 
         public override string Name => "/log_in";
 
+        public Model.User GetUser()
+        {
+            return currentUser;
+        }
+
         public override bool Contains(string command)
         {
             return command.Contains(this.Name);

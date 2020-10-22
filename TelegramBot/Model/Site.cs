@@ -17,7 +17,7 @@ namespace TelegramBot.Model
 
         public Site() { }
 
-        public Site(string name, int userId)
+        public Site(string name, int userId, Model.User user)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -26,6 +26,7 @@ namespace TelegramBot.Model
 
             Name = name;
             UserId = userId;
+            User = user;
         }
 
     }

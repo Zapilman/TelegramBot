@@ -23,13 +23,8 @@ namespace TelegramBot.Model
 
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData("Создать пароль"),
-                    InlineKeyboardButton.WithCallbackData("Войти в аккаунт")
-                },
-                new[]
-                {
                     InlineKeyboardButton.WithCallbackData("Зарегистрироваться"),
-                    InlineKeyboardButton.WithUrl("Написать автору какой он пусечка","https://www.instagram.com/_yuro4ka/?hl=ru")
+                    InlineKeyboardButton.WithCallbackData("Войти в аккаунт")
                 }
             });
 

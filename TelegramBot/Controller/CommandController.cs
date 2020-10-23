@@ -1,29 +1,29 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using TelegramBot.Model;
 
 namespace TelegramBot.Controller
 {
-    public class CommandController
+    public class CommandController: ControllerBase
     {
 
 
-        private readonly IDataSaver manager = new DbSaver();
-        
+        private List<Command> Commands { get; }
 
         public CommandController(Message message,TelegramBotClient botClient)
         {
-
+            Commands = new List<Command>();
             var commands = new CommandsList();
             
             foreach(var command in commands.GetCommands())
             {
                 IsContains(command);
             }
-            
+            Save<Command>(Commands);
 
-            foreach (var command in manager.Load<Command>())
+            foreach (var command in Load<Command>())
             {
                 if (command.Contains(message.Text))
                 {
@@ -41,14 +41,14 @@ namespace TelegramBot.Controller
 
         public void IsContains(Command command)
         {
-            foreach (var dbCommand in manager.Load<Command>())
+            foreach (var dbCommand in Load<Command>())
             {
                 if (dbCommand.Name == command.Name)
                 {
                     return;
                 }
             }
-            manager.Add<Command>(command);
+            Commands.Add(command);
         }
 
     }

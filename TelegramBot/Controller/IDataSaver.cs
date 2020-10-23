@@ -11,6 +11,5 @@ namespace TelegramBot.Controller
 
         List<T> Load<T>() where T : class;
 
-        void Add<T>(T item) where T : class;
     }
 }

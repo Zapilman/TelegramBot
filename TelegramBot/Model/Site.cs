@@ -17,16 +17,23 @@ namespace TelegramBot.Model
 
         public Site() { }
 
-        public Site(string name, int userId, Model.User user)
+        public Site(string name, Model.User user, string password, string url)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new System.ArgumentException("message", nameof(name));
             }
 
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new System.ArgumentException("message", nameof(password));
+            }
+
             Name = name;
-            UserId = userId;
+            UserId = user.Id;
             User = user;
+            Password = password;
+            Url = url;
         }
 
     }

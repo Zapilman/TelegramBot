@@ -100,9 +100,8 @@ namespace TelegramBot.Model
             var text = e?.Message?.Text;
             bot.SendTextMessageAsync(e.Message.Chat.Id, $"Site {text} has been saved");
             var site = new Site(text, currentUser.Id,currentUser);
-            Controller.IDataSaver manager = new Controller.DbSaver();
-            manager.Add<Site>(site);
-            GetStepByStep.sucsess = true;
+            var controller = new SiteController();
+            controller.AddSite(site);
             bot.StopReceiving();
             bot.OnMessage -= Bot_OnMessage;
         }

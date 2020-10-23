@@ -65,6 +65,7 @@
     <Compile Include="Controller\GetStepByStep.cs" />
     <Compile Include="Controller\IDataSaver.cs" />
     <Compile Include="Controller\IGetValues.cs" />
+    <Compile Include="Controller\SiteController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\CommandController.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Model\CommandsList.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\LogInCommand.cs" />
+    <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\RegistrateCommand.cs" />
     <Compile Include="Model\CreatePassCommand.cs" />
     <Compile Include="Model\SayHelloCommand.cs" />

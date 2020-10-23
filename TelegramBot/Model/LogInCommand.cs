@@ -34,6 +34,7 @@ namespace TelegramBot.Model
             botClient.OnMessage += Bot_OnMessage;
             botClient.StartReceiving();
             manager.Execute(message, botClient);
+
             botClient.OnMessage -= Bot_OnMessage;
         }
 
@@ -48,6 +49,9 @@ namespace TelegramBot.Model
                 if(GetStepByStep.item1 == "password")
                 {
                     bot.SendTextMessageAsync(e.Message.Chat.Id, $"Hello @{currentUser.Name}");
+                    bot.OnMessage -= Bot_OnMessage;
+                    bot.StopReceiving();
+                    var profile = new Profile(bot, e.Message);
                 }
             }
             else

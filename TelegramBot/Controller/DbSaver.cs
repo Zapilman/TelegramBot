@@ -23,12 +23,6 @@ namespace TelegramBot.Controller
             botContext.SaveChanges();
         }
         
-        public void Add<T>(T item) where T : class
-        {
-            using var botContext = new BotContext();
-            botContext.Set<T>().Add(item);
-            botContext.SaveChanges();
-        }
-
+        
     }
 }

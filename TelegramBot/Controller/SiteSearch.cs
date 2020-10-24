@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types;
 using TelegramBot.Model;
 
 namespace TelegramBot.Controller
@@ -24,12 +25,27 @@ namespace TelegramBot.Controller
             return site;
         }
 
+
+        public void ChangeSite(string name,CallbackQuery callback)
+        {
+            var newPass = new SetPassword(bot);
+            newPass.InputNew(callback);
+            var password = newPass.GetPassword();
+
+            var context = new BotContext();
+            var site = context.Sites.SingleOrDefault(s => s.Name == name);
+
+            site.Password = password;
+            context.SaveChanges();
+
+            bot.SendTextMessageAsync(callback.Message.Chat.Id, $"Пароль к сайту {site.Name} был успешно изменён");
+            bot.SendTextMessageAsync(callback.Message.Chat.Id, $"{site.Name}   {site.Password}   {site.Url}");
+        }
         public SiteSearch(TelegramBotClient botClient, IReadOnlyList<Site> sites)
         {
             orSites = sites;
             bot = botClient;
             bot.OnMessage += Bot_OnMessage;
-            bot.StartReceiving();
 
             var time = 10;
             

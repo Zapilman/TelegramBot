@@ -59,7 +59,27 @@ namespace TelegramBot.Controller
         }
 
         
+        public void ChangePassword(int userId, TelegramBotClient botClient, CallbackQuery callback)
+        {
+            botClient.SendTextMessageAsync(callback.Message.Chat.Id, "Список ваших сохр. сайтов:");
+            var number = 0;
+            foreach (var s in GetSites())
+            {
+                if (s.UserId == userId)
+                {
+                    number++;
+                    botClient.SendTextMessageAsync(callback.Message.Chat.Id, $"{number}: {s.Name}");
 
+                }
+            }
+            
+            botClient.SendTextMessageAsync(callback.Message.Chat.Id, "Пароль к какому сайту вы хотите изменить?");
+            var sitesearch = new SiteSearch(botClient, GetSites());
+            var site = sitesearch.GetSite();
+            sitesearch.ChangeSite(site.Name, callback);
+            
+            
+        }
        
 
         private List<Site> GetSites()

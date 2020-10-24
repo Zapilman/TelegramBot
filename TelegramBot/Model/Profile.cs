@@ -1,10 +1,9 @@
 ﻿
 
-using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using System;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBot.Controller;
 
 namespace TelegramBot.Model
@@ -41,7 +40,7 @@ namespace TelegramBot.Model
             bot.SendTextMessageAsync(message.Chat.Id, "Что вы хотите сделать ?", replyMarkup: keyboard);
         }
 
-        
+
 
         private void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
@@ -60,8 +59,8 @@ namespace TelegramBot.Model
                     passwords.SeeAll(currentUser.Id, bot, e.CallbackQuery);
                     break;
                 case "Изменить сущ. пароль":
-                    //var password = new SiteController();
-                    //password.ChangePassword();
+                    var password = new SiteController();
+                    password.ChangePassword(currentUser.Id, bot, e.CallbackQuery);
                     break;
                 case "Сохранить свой пароль":
                     //var password = new SiteController();

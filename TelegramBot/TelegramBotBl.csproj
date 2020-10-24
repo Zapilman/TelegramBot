@@ -65,6 +65,7 @@
     <Compile Include="Controller\GetStepByStep.cs" />
     <Compile Include="Controller\IDataSaver.cs" />
     <Compile Include="Controller\IGetValues.cs" />
+    <Compile Include="Controller\SetPassword.cs" />
     <Compile Include="Controller\SiteController.cs" />
     <Compile Include="Controller\SiteSearch.cs" />
     <Compile Include="Controller\UserController.cs" />

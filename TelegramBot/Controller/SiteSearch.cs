@@ -32,7 +32,7 @@ namespace TelegramBot.Controller
             newPass.InputNew(callback);
             var password = newPass.GetPassword();
 
-            var context = new BotContext();
+            using var context = new BotContext();
             var site = context.Sites.SingleOrDefault(s => s.Name == name);
 
             site.Password = password;

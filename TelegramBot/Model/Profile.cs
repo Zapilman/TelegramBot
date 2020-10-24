@@ -5,15 +5,18 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using System;
 using Telegram.Bot.Args;
+using TelegramBot.Controller;
 
 namespace TelegramBot.Model
 {
     public class Profile
     {
         private TelegramBotClient bot;
-        public Profile(TelegramBotClient bot, Message message)
+        private Model.User currentUser;
+        public Profile(TelegramBotClient bot, Message message, User user)
         {
             this.bot = bot;
+            currentUser = user;
             var keyboard = new InlineKeyboardMarkup(new[] {
 
                 new[]
@@ -38,6 +41,8 @@ namespace TelegramBot.Model
             bot.SendTextMessageAsync(message.Chat.Id, "Что вы хотите сделать ?", replyMarkup: keyboard);
         }
 
+        
+
         private void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
             var buttonText = e.CallbackQuery.Data;
@@ -52,18 +57,18 @@ namespace TelegramBot.Model
                     break;
                 case "Посмотреть все пароли":
                     var passwords = new SiteController();
-                    passwords.SeeAll();
+                    passwords.SeeAll(currentUser.Id, bot, e.CallbackQuery);
                     break;
                 case "Изменить сущ. пароль":
-                    var password = new SiteController();
-                    password.ChangePassword();
+                    //var password = new SiteController();
+                    //password.ChangePassword();
                     break;
                 case "Сохранить свой пароль":
-                    var password = new SiteController();
-                    password.CreateOwnPassword();
+                    //var password = new SiteController();
+                    //password.CreateOwnPassword();
                     break;
                 case "Выйти из профиля":
-                    var currentUser = null;
+                    //var currentUser = null;
                     break;
 
             }

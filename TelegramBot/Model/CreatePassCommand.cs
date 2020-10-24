@@ -13,7 +13,7 @@ namespace TelegramBot.Model
         public override string Name => "/createPassword";
         private TelegramBotClient bot;
         private Model.User currentUser;
-
+        private  string sitePassword;
         public override bool Contains(string command)
         {
             return command.Contains(this.Name);
@@ -24,7 +24,7 @@ namespace TelegramBot.Model
             var pass = Guid.NewGuid().ToString();
             bot = botClient;
             botClient.OnCallbackQuery += Bot_OnCallbackQuery;
-            
+            sitePassword = pass;
             
 
             botClient.SendTextMessageAsync(message.Chat.Id, pass.Replace('-', 'a'));
@@ -99,9 +99,8 @@ namespace TelegramBot.Model
         {
             var text = e?.Message?.Text;
             bot.SendTextMessageAsync(e.Message.Chat.Id, $"Site {text} has been saved");
-            var site = new Site(text, currentUser.Id,currentUser);
             var controller = new SiteController();
-            controller.AddSite(site);
+            controller.AddSite(text,currentUser, sitePassword);
             bot.StopReceiving();
             bot.OnMessage -= Bot_OnMessage;
         }

@@ -66,6 +66,7 @@
     <Compile Include="Controller\IDataSaver.cs" />
     <Compile Include="Controller\IGetValues.cs" />
     <Compile Include="Controller\SiteController.cs" />
+    <Compile Include="Controller\SiteSearch.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\CommandController.cs" />
     <Compile Include="Migrations\Configuration.cs" />

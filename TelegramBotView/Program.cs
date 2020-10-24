@@ -44,8 +44,7 @@ namespace TelegramView
 
             }
             botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Оброботчик событий работает");
-            //botClient.OnMessage += Bot_OnMessage;
-            //botClient.OnCallbackQuery += Bot_OnCallbackQuery;
+            botClient.OnMessage += Bot_OnMessage;
 
         }
 

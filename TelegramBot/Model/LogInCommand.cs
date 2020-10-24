@@ -51,7 +51,7 @@ namespace TelegramBot.Model
                     bot.SendTextMessageAsync(e.Message.Chat.Id, $"Hello @{currentUser.Name}");
                     bot.OnMessage -= Bot_OnMessage;
                     bot.StopReceiving();
-                    var profile = new Profile(bot, e.Message);
+                    var profile = new Profile(bot, e.Message, currentUser);
                 }
             }
             else

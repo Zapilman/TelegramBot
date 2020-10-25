@@ -35,7 +35,6 @@ namespace TelegramBot.Model
                 }
             });
             bot.StartReceiving();
-            //bot.OnMessage += Bot_OnMessage; Добавить в нужный момент, когда нужно будет изменить пароль или сохранить свой
             bot.OnCallbackQuery += Bot_OnCallbackQuery;
             bot.SendTextMessageAsync(message.Chat.Id, "Что вы хотите сделать ?", replyMarkup: keyboard);
         }
@@ -45,7 +44,6 @@ namespace TelegramBot.Model
         private void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
             var buttonText = e.CallbackQuery.Data;
-            bot.OnMessage -= Bot_OnMessage;
             bot.OnCallbackQuery -= Bot_OnCallbackQuery;
             switch (buttonText)
             {
@@ -67,16 +65,12 @@ namespace TelegramBot.Model
                     owmPassword.CreateOwnPassword(bot,e.CallbackQuery,currentUser);
                     break;
                 case "Выйти из профиля":
-                    //var currentUser = null;
+                    var currentUser = null;
                     break;
 
             }
         }
 
-        private void Bot_OnMessage(object sender, MessageEventArgs e)
-        {
-            var text = e?.Message?.Text;
-            bot.SendTextMessageAsync(e.Message.Chat.Id, text.ToString());
-        }
+        
     }
 }

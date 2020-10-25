@@ -29,7 +29,7 @@ namespace TelegramBot.Controller
         public void ChangeSite(string name,CallbackQuery callback)
         {
             var newPass = new SetValue(bot);
-            newPass.InputNew(callback,"password");
+            newPass.InputNew(callback.Message," новый password");
             var password = newPass.GetValue();
 
             using var context = new BotContext();

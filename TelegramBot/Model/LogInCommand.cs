@@ -14,7 +14,6 @@ namespace TelegramBot.Model
     {
         private Model.User currentUser;
         private TelegramBotClient bot;
-        private readonly IGetValues manager = new GetStepByStep();
 
         public override string Name => "/log_in";
 
@@ -31,55 +30,32 @@ namespace TelegramBot.Model
         public override void Execute(Message message, TelegramBotClient botClient)
         {
             bot = botClient;
-            botClient.OnMessage += Bot_OnMessage;
-            botClient.StartReceiving();
-            manager.Execute(message, botClient);
+            var controller = new UserController();
 
-            botClient.OnMessage -= Bot_OnMessage;
-        }
-
-        private void Bot_OnMessage(object sender, MessageEventArgs e)
-        {
-            var text = e.Message.Text;
-             bot.SendTextMessageAsync(e.Message.Chat.Id, "Запущен LogIn оброботчик событий");
-
-            if (CheckInput(text))
-            {
-                bot.StopReceiving();
-                if(GetStepByStep.item1 == "password")
-                {
-                    bot.SendTextMessageAsync(e.Message.Chat.Id, $"Hello @{currentUser.Name}");
-                    bot.OnMessage -= Bot_OnMessage;
-                    bot.StopReceiving();
-                    var profile = new Profile(bot, e.Message, currentUser);
-                }
-            }
-            else
-            {
-                 bot.SendTextMessageAsync(e.Message.Chat.Id, $"You inputed wrong {GetStepByStep.item1}");
-            }
-        }
-
-        private bool CheckInput(string text)
-        {
-            UserController userController = new UserController();
-            if (GetStepByStep.item1 == "login")
-            {
-                currentUser = userController.Users.SingleOrDefault(u => u.Login == text);
-            }
-            if (GetStepByStep.item1 == "password")
-            {
-                currentUser = userController.Users.SingleOrDefault(u => u.Password == text);
-            }
-
+            var setLog = new SetValue(bot);
+            setLog.InputNew(message, "login");
+            var login = setLog.GetValue();
+            currentUser = controller.Users.SingleOrDefault(u => u.Login == login);
             if (currentUser == null)
             {
-                GetStepByStep.sucsess = false;
-                return false;
+                bot.SendTextMessageAsync(message.Chat.Id, "wrong login");
+                return;
             }
 
-            GetStepByStep.sucsess = true;
-            return true;
+            var setPass = new SetValue(bot);
+            setPass.InputNew(message, "password");
+            var password = setPass.GetValue();
+            currentUser = controller.Users.SingleOrDefault(u => u.Password == password);
+            if (currentUser == null)
+            {
+                bot.SendTextMessageAsync(message.Chat.Id, "wrong password");
+                return;
+            }
+
+            bot.SendTextMessageAsync(message.Chat.Id, $"Hello @{message.Chat.Username}");
+
         }
+
+       
     }
 }

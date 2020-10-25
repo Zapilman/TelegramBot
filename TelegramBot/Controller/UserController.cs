@@ -28,8 +28,8 @@ namespace TelegramBot.Controller
 
             
 
-            var user = new Model.User(password, login,userName);
-            Users.Add(user);
+            
+            Users.Add(new Model.User(password, login, userName));
             Save();
 
         }

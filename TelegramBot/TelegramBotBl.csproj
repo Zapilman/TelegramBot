@@ -62,9 +62,7 @@
   <ItemGroup>
     <Compile Include="Controller\ControllerBase.cs" />
     <Compile Include="Controller\DbSaver.cs" />
-    <Compile Include="Controller\GetStepByStep.cs" />
     <Compile Include="Controller\IDataSaver.cs" />
-    <Compile Include="Controller\IGetValues.cs" />
     <Compile Include="Controller\SetValue.cs" />
     <Compile Include="Controller\SiteController.cs" />
     <Compile Include="Controller\SiteSearch.cs" />

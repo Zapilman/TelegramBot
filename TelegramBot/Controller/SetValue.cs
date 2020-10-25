@@ -20,10 +20,12 @@ namespace TelegramBot.Controller
             value = "";
         }
 
-        public void InputNew(CallbackQuery callback, string item)
+        public void InputNew(Message message, string item)
         {
+            
+            bot.SendTextMessageAsync(message.Chat.Id, $"Введите {item}");
             bot.OnMessage += Bot_OnMessage;
-            bot.SendTextMessageAsync(callback.Message.Chat.Id, $"Введите новый {item}");
+            bot.StartReceiving();
 
             var time = 10;
             do
@@ -47,10 +49,10 @@ namespace TelegramBot.Controller
         private void Bot_OnMessage(object sender, MessageEventArgs e)
         {
             var text = e?.Message?.Text;
-
             value = text;
-
+            
             bot.OnMessage -= Bot_OnMessage;
+            bot.StopReceiving();
         }
 
         public string GetValue()

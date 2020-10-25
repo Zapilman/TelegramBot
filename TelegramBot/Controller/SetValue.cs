@@ -10,20 +10,20 @@ using Telegram.Bot.Types;
 
 namespace TelegramBot.Controller
 {
-    public class SetPassword
+    public class SetValue
     {
         private TelegramBotClient bot;
-        private string password;
-        public SetPassword(TelegramBotClient botClient)
+        private string value;
+        public SetValue(TelegramBotClient botClient)
         {
             bot = botClient;
-            password = "";
+            value = "";
         }
 
-        public void InputNew(CallbackQuery callback)
+        public void InputNew(CallbackQuery callback, string item)
         {
             bot.OnMessage += Bot_OnMessage;
-            bot.SendTextMessageAsync(callback.Message.Chat.Id, "Введите новый пароль");
+            bot.SendTextMessageAsync(callback.Message.Chat.Id, $"Введите новый {item}");
 
             var time = 10;
             do
@@ -31,7 +31,7 @@ namespace TelegramBot.Controller
 
                 if (time == 0)
                 {
-                    password = "None";
+                    value = "None";
                     break;
                 }
                 else
@@ -40,7 +40,7 @@ namespace TelegramBot.Controller
                     time--;
                 }
 
-            } while (password == "");
+            } while (value == "");
 
         }
 
@@ -48,14 +48,14 @@ namespace TelegramBot.Controller
         {
             var text = e?.Message?.Text;
 
-            password = text;
+            value = text;
 
             bot.OnMessage -= Bot_OnMessage;
         }
 
-        public string GetPassword()
+        public string GetValue()
         {
-            return password;
+            return value;
         }
     }
 }

@@ -80,7 +80,24 @@ namespace TelegramBot.Controller
             
             
         }
-       
+
+        public void CreateOwnPassword( TelegramBotClient bot, CallbackQuery callback, Model.User user)
+        {
+            var setName = new SetValue(bot);
+            setName.InputNew(callback, "sites name");
+            var name = setName.GetValue();
+            var setPass = new SetValue(bot);
+            setPass.InputNew(callback, "password");
+            var password = setPass.GetValue();
+            var setUrl = new SetValue(bot);
+            setUrl.InputNew(callback, "url");
+            var url = setUrl.GetValue();
+
+            Sites.Add(new Site(name, user, password, url));
+            Save();
+
+            bot.SendTextMessageAsync(callback.Message.Chat.Id, $"сайт {name} был сохранён");
+        }
 
         private List<Site> GetSites()
         {

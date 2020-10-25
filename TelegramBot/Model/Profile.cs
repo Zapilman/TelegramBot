@@ -63,8 +63,8 @@ namespace TelegramBot.Model
                     password.ChangePassword(currentUser.Id, bot, e.CallbackQuery);
                     break;
                 case "Сохранить свой пароль":
-                    //var password = new SiteController();
-                    //password.CreateOwnPassword();
+                    var owmPassword = new SiteController();
+                    owmPassword.CreateOwnPassword(bot,e.CallbackQuery,currentUser);
                     break;
                 case "Выйти из профиля":
                     //var currentUser = null;

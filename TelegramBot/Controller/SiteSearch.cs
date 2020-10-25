@@ -28,9 +28,9 @@ namespace TelegramBot.Controller
 
         public void ChangeSite(string name,CallbackQuery callback)
         {
-            var newPass = new SetPassword(bot);
-            newPass.InputNew(callback);
-            var password = newPass.GetPassword();
+            var newPass = new SetValue(bot);
+            newPass.InputNew(callback,"password");
+            var password = newPass.GetValue();
 
             using var context = new BotContext();
             var site = context.Sites.SingleOrDefault(s => s.Name == name);
@@ -41,6 +41,9 @@ namespace TelegramBot.Controller
             bot.SendTextMessageAsync(callback.Message.Chat.Id, $"Пароль к сайту {site.Name} был успешно изменён");
             bot.SendTextMessageAsync(callback.Message.Chat.Id, $"{site.Name}   {site.Password}   {site.Url}");
         }
+
+        
+
         public SiteSearch(TelegramBotClient botClient, IReadOnlyList<Site> sites)
         {
             orSites = sites;
